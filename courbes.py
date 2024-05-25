@@ -55,18 +55,20 @@ for line in lines:
     # Convertir chaque valeur en float et ajouter à la liste correspondante
     Pe.append(float(values[0]))
     Sh.append(float(values[1]))
+
 Re = 0.1
 Sc = [Pe[i]/Re for i in range(len(Pe))]
-Sh_th_rm= [2+0.6*Re**0.5*Sc[i]**(1/3) for i in range(len(Sc)) ]
+Sh_th_rm= [2+0.6*Re**0.5*(Sc[i]**(1/3)) for i in range(len(Sc)) ]
 Sc_th_c = [1+(1+Pe[i])**(1/3) for i in range(len(Pe))]
 
 #Tracer la courbe
 plt.figure(2)
 plt.loglog(Pe, Sh, label='Numérique')
-plt.loglog(Pe, Sh_th_rm, label='Theorique, Ranz & Marshall', linestyle='--')
-plt.loglog(Pe, Sc_th_c, label='Theorique, Clift', linestyle='--')
+plt.loglog(Pe, Sh_th_rm, label='Theorique, Ranz & Marshall')
+#plt.loglog(Pe, Sc_th_c, label='Theorique, Clift', linestyle='--')   
 plt.xlabel('Pe')
 plt.ylabel('Sh')
+plt.ylim(0,100)
 plt.title('')
 plt.legend()
 plt.grid()
