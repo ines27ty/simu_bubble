@@ -96,8 +96,8 @@ for line in lines:
 #Tracer la courbe
 plt.figure(1)
 plt.plot(Da, Sc)
-plt.xlabel('Da (m3/s)')
-plt.ylabel('Sc (m)')
+plt.xlabel('Da')
+plt.ylabel('Sc')
 plt.title('')
 plt.legend()
 plt.grid()
