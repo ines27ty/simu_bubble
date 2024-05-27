@@ -4,7 +4,7 @@ from math import *
 
 # Cd et Re
 # Ouvrir le fichier
-with open("Cd_Re.txt", 'r') as fichier:
+with open("0524/Cd_Re.txt", 'r') as fichier:
     # Lire les lignes du fichier
     lines = fichier.readlines()
 
@@ -39,7 +39,7 @@ plt.grid()
 
 # Pe Sh Re 0.1
 # Ouvrir le fichier
-with open("Pe_Sh_Re_0_1.txt", 'r') as fichier:
+with open("0524/Pe_Sh_Re_0_1.txt", 'r') as fichier:
     # Lire les lignes du fichier
     lines = fichier.readlines()
 
@@ -76,13 +76,15 @@ plt.grid()
 
 # Da et Sc
 # Ouvrir le fichier
-with open("Da_Sc_1.txt", 'r') as fichier:
+with open("0524/Da_Sc_1.txt", 'r') as fichier:
     # Lire les lignes du fichier
     lines = fichier.readlines()
 
 # Initialiser des listes vides pour stocker les données
 Da = []
 Sc = []
+Ha = []
+E_th = []
 
 # Parcourir chaque ligne du fichier
 for line in lines:
@@ -92,12 +94,20 @@ for line in lines:
     # Convertir chaque valeur en float et ajouter à la liste correspondante
     Da.append(float(values[0]))
     Sc.append(float(values[1]))
+    Ha.append(np.sqrt(Da[-1])/3.7)
+    E_th.append(Ha[-1]/np.tanh(Ha[-1]))
 
+print(np.abs(E_th[-1]-Sc[-1])/Sc[-1])
+print(Ha[-1])
+
+# Ha théo = sqrt(k'delta^2/D)
 #Tracer la courbe
 plt.figure(1)
-plt.plot(Da, Sc)
-plt.xlabel('Da')
-plt.ylabel('Sc')
+plt.plot(Ha, Sc, label = 'Numérique', color = 'orange')
+plt.plot(Ha, E_th, label = 'Prédiction théorique', color = 'blue')
+plt.xlabel('Ha')
+plt.ylabel('E')
+#plt.loglog()
 plt.title('')
 plt.legend()
 plt.grid()
